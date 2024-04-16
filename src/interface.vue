@@ -1,9 +1,13 @@
 <template>
-	<div v-if="mode" :style="customCss">
-		<span class="prefix">{{ prefix }}</span>
-		<span class="computed-value">{{ computedValue }}</span>
-		<span class="suffix">{{ suffix }}</span>
-	</div>
+	<v-input
+		v-if="mode"
+		v-bind="$attrs"
+		:field="field"
+		:collection="collection"
+		:primary-key="primaryKey"
+		:model-value="value"
+		:readonly="true"
+	/>
 	<v-input
 		v-else
 		v-bind="$attrs"
