@@ -1,3 +1,4 @@
+import slugify from '@sindresorhus/slugify';
 import { findValueByPath, isString } from './utils';
 
 export function parseExpression(
@@ -538,20 +539,5 @@ export function toSlug(str: unknown) {
 		return '';
 	}
 
-	let res = str.replace(/^\s+|\s+$/g, ''); // trim
-	res = res.toLowerCase();
-
-	// remove accents
-	const from = 'àáãảạăằắẳẵặâầấẩẫậèéẻẽẹêềếểễệđùúủũụưừứửữựòóỏõọôồốổỗộơờớởỡợìíỉĩịäëïîöüûñçýỳỹỵỷ';
-	const to = 'aaaaaaaaaaaaaaaaaeeeeeeeeeeeduuuuuuuuuuuoooooooooooooooooiiiiiaeiiouuncyyyyy';
-	for (let i = 0, l = from.length; i < l; i++) {
-		res = res.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
-	}
-
-	res = res
-		.replace(/[^a-z0-9 -]/g, '') // remove invalid chars
-		.replace(/\s+/g, '-') // collapse whitespace and replace by -
-		.replace(/-+/g, '-'); // collapse dashes
-
-	return res;
+	return slugify(str);
 }
